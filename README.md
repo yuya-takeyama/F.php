@@ -6,7 +6,7 @@ If you're using modern PHP interpreter (>= 5.5) use [nikic/iter](https://github.
 
 ## Usage
 
-Almost APIs are inspired by [Haskell's Prelude](hackage.haskell.org/package/base/docs/Prelude.html) and [nikic/iter](https://github.com/nikic/iter).
+Almost APIs are inspired by [Haskell's Prelude](http://hackage.haskell.org/package/base/docs/Prelude.html) and [nikic/iter](https://github.com/nikic/iter).
 
 ## Author
 
