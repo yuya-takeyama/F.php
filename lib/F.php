@@ -183,6 +183,27 @@ class F
         }
     }
 
+    public static function zip(/* $iterators... */)
+    {
+        $iterators = func_get_args();
+        $iterators = F::toArray(self::map('F::toIterator', $iterators));
+
+        return new F_ZippingIterator($iterators);
+    }
+
+    public static function product(/* $iterators... */)
+    {
+        $iterators = func_get_args();
+        $iterators = F::toArray(self::map('F::toIterator', $iterators));
+
+        return new F_ProductIterator($iterators);
+    }
+
+    public static function cycle($iterable)
+    {
+        return new InfiniteIterator(F::toIterator($iterable));
+    }
+
     public static function toArray($iterable)
     {
         $array = array();
@@ -226,15 +247,16 @@ class F
     {
         if (is_null(self::$operators)) {
             self::$operators = array(
-                '+'   => create_function('$x, $y', 'return $x + $y;'),
-                '-'   => create_function('$x, $y', 'return $x - $y;'),
-                '*'   => create_function('$x, $y', 'return $x * $y;'),
-                '/'   => create_function('$x, $y', 'return $x / $y;'),
-                '%'   => create_function('$x, $y', 'return $x % $y;'),
-                '**'  => create_function('$x, $y', 'return pow($x, $y);'),
-                '.'   => create_function('$x, $y', 'return $x . $y;'),
-                '===' => create_function('$x, $y', 'return $x === $y;'),
-                '!==' => create_function('$x, $y', 'return $x !== $y;'),
+                '+'          => create_function('$x, $y', 'return $x + $y;'),
+                '-'          => create_function('$x, $y', 'return $x - $y;'),
+                '*'          => create_function('$x, $y', 'return $x * $y;'),
+                '/'          => create_function('$x, $y', 'return $x / $y;'),
+                '%'          => create_function('$x, $y', 'return $x % $y;'),
+                '**'         => create_function('$x, $y', 'return pow($x, $y);'),
+                '.'          => create_function('$x, $y', 'return $x . $y;'),
+                '==='        => create_function('$x, $y', 'return $x === $y;'),
+                '!=='        => create_function('$x, $y', 'return $x !== $y;'),
+                'instanceof' => create_function('$x, $y', 'return $x instanceof $y;'),
             );
         }
 
